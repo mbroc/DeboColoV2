@@ -3,19 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <title>Accès privé</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #f0f4f8;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 1.6em;
+      color: #333;
+    }
+
+    input[type="password"] {
+      padding: 12px;
+      width: 100%;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 12px 24px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
 </head>
 <body>
-  <h2>Mot de passe requis</h2>
-  <input type="password" id="pwd" placeholder="Mot de passe">
-  <button onclick="checkPassword()">Entrer</button>
+  <div class="container">
+    <h1>Accès réservé 🔐</h1>
+    <input type="password" id="password" placeholder="Entre le mot de passe">
+    <button onclick="checkPassword()">Accéder</button>
+    <p class="error" id="error-message">Mot de passe incorrect</p>
+  </div>
 
   <script>
     function checkPassword() {
-      const pwd = document.getElementById("pwd").value;
-      if (pwd === "monmotdepasse") {
-        window.location.href = "https://sites.google.com/view/monsite/page-principale";
+      const input = document.getElementById('password').value;
+      const error = document.getElementById('error-message');
+      const correctPassword = 'Vroumcat'; // ← remplace par ton mot de passe
+
+      if (input === correctPassword) {
+        window.location.href = 'https://sites.google.com/view/tonsite/page-principale'; // ← redirige vers ton site
       } else {
-        alert("Mot de passe incorrect.");
+        error.style.display = 'block';
       }
     }
   </script>
