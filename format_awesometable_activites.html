@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<div>
+<div style="font-family: 'Arial', sans-serif;">
   {{#each records}}
-    <div style="margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
-      <strong>Nom de l'activité :</strong> {{Nom de l'activité}}<br>
-      <strong>Date :</strong> {{Date}}<br>
-      <strong>Description :</strong> {{Description}}<br>
+    <div style="background: #fef6e4; margin: 20px 0; padding: 15px; border-radius: 10px; border: 1px solid #fcd5ce; box-shadow: 2px 2px 5px rgba(0,0,0,0.05);">
+      <h2 style="color: #f582ae;">🌴 {{Nom de l'activité}}</h2>
+      <p><strong>📅 Date :</strong> {{Date}}</p>
+      <p><strong>📝 Description :</strong> {{Description}}</p>
+      {{#if Lien}}
+        <p><a href="{{Lien}}" style="background: #f582ae; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none;">S'inscrire</a></p>
+      {{/if}}
     </div>
   {{/each}}
-</div>
