@@ -1,88 +1,101 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Accès privé</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      background: #f0f4f8;
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
+<meta charset="UTF-8">
+<title>Accès privé</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+    background: #f0f4f8;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+  }
 
-    .container {
-      background: white;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      max-width: 400px;
-      width: 90%;
-    }
+  .container {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease forwards;
+  }
 
-    h1 {
-      margin-bottom: 20px;
-      font-size: 1.6em;
-      color: #333;
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
+  }
 
-    input[type="password"] {
-      padding: 12px;
-      width: 100%;
-      font-size: 1em;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      box-sizing: border-box;
-    }
+  h1 {
+    margin-bottom: 20px;
+    font-size: 1.6em;
+    color: #333;
+  }
 
-    button {
-      padding: 12px 24px;
-      background: #007BFF;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 1em;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
+  input[type="password"] {
+    padding: 12px;
+    width: 100%;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+  }
 
-    button:hover {
-      background: #0056b3;
-    }
+  button {
+    padding: 12px 24px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
 
-    .error {
-      color: red;
-      margin-top: 10px;
-      display: none;
-    }
-  </style>
+  button:hover {
+    background: #0056b3;
+  }
+
+  .error {
+    color: red;
+    margin-top: 10px;
+    display: none;
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>Accès réservé 🔐</h1>
-    <input type="password" id="password" placeholder="Entre le mot de passe">
-    <button onclick="checkPassword()">Accéder</button>
-    <p class="error" id="error-message">Mot de passe incorrect</p>
-  </div>
 
-  <script>
-    function checkPassword() {
-      const input = document.getElementById('password').value;
-      const error = document.getElementById('error-message');
-      const correctPassword = 'Vroumcat'; // ← remplace par ton mot de passe a
+<div class="container">
+  <h1>Accès réservé 🔐</h1>
+  <input type="password" id="password" placeholder="Entre le mot de passe">
+  <button onclick="checkPassword()">Accéder</button>
+  <p class="error" id="error-message">Mot de passe incorrect</p>
+</div>
 
-      if (input === correctPassword) {
-        window.location.href = 'https://sites.google.com/view/debocolotest/accueil'; // ← redirige vers ton site
-      } else {
-        error.style.display = 'block';
-      }
-    }
-  </script>
+<script>
+function checkPassword() {
+  const input = document.getElementById('password').value;
+  const error = document.getElementById('error-message');
+  const correctPassword = 'motsecret123'; // ← remplace par ton mot de passe
+
+  if (input === correctPassword) {
+    window.location.href = 'https://sites.google.com/view/tonsite/page-principale'; // ← remplace par ton URL
+  } else {
+    error.style.display = 'block';
+  }
+}
+</script>
+
 </body>
 </html>
