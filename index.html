@@ -77,7 +77,7 @@
 <body>
 
 <div class="container">
-  <h1>Accès réservé 🔐</h1>
+  <h1>Accès réservé aux meilleurs 🔐</h1>
   <input type="password" id="password" placeholder="Entre le mot de passe">
   <button onclick="checkPassword()">Accéder</button>
   <p class="error" id="error-message">Mot de passe incorrect</p>
@@ -87,10 +87,10 @@
 function checkPassword() {
   const input = document.getElementById('password').value;
   const error = document.getElementById('error-message');
-  const correctPassword = 'motsecret123'; // ← remplace par ton mot de passe
+  const correctPassword = 'Vroumcat'; // ← remplace par ton mot de passe
 
   if (input === correctPassword) {
-    window.location.href = 'https://sites.google.com/view/tonsite/page-principale'; // ← remplace par ton URL
+    window.location.href = 'https://sites.google.com/view/debocolotest/accueil'; // ← remplace par ton URL
   } else {
     error.style.display = 'block';
   }
