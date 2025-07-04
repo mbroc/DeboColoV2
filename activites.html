@@ -46,7 +46,7 @@
 </head>
 <body>
 
-<h1>Activités à venir ghgggg</h1>
+<h1>Activités à venir</h1>
 
 <div id="loader" class="loader">Chargement des activités…</div>
 <div id="activities"></div>
@@ -57,6 +57,54 @@ const csvURL = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=ou
 
 fetch(csvURL)
   
+  .then(response => response.text())
+  .then(csv => {
+    const rows = csv.split("\n").slice(1); // on saute la première ligne (headers)
+    const container = document.getElementById("activities");
+    rows.forEach(row => {
+      const cols = row.split(",");
+      //if (cols.length < 6) return; // ignore lignes incomplètes //Non, pas pour l'instant
+      const activity_id = cols[0].trim(); 
+      const date = cols[1].trim(); // index start à 1 car index 0 = ID
+      const name = cols[2].trim();
+      const desc = cols[3].trim();
+      const budget = cols[4].trim();
+      const maxP = cols[5].trim();
+      const currentP = cols[6].trim();
+
+      const html = `
+      <div class="activity">
+        <p><span class="highlight">Date :</span> ${date}</p>
+        <p><span class="highlight">Activité :</span> ${name}</p>
+        <p><span class="highlight">Description :</span> ${desc}</p>
+        <p><span class="highlight">Budget estimé :</span> ${budget} €</p>
+        <p><span class="highlight">Jusqu'à</span> ${maxP} participants</p>
+        <p><strong>Jusqu'à :</strong> ${maxP} participants</p>
+        <p><span class="highlight">Déjà inscrits :</span> ${currentP}</p>
+
+        
+        <p><strong>Date :</strong> ${date}</p>
+        <p><strong>Activité :</strong> ${name}</p>
+        <p><strong>Description :</strong> ${desc}</p>
+        <p><strong>Budget estimé :</strong> ${budget} €</p>
+        <p><strong>Jusqu'à :</strong> ${maxP} participants</p>
+        <p><strong>Déjà inscrits :</strong> ${currentP} participants</p>
+
+      //ajout
+      {{#if Lien}}
+        <p><a href="{{https://tally.so/r/m6YQoe?activity_id=${activity_id}}}" style="background: #f582ae; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none;">S'inscrire</a></p>
+      {{/if}}
+
+      
+      </div>`;
+      container.insertAdjacentHTML("beforeend", html);
+    });
+  })
+  .catch(error => {
+    document.getElementById("activities").innerHTML =
+      "<p>Erreur lors du chargement des activités.</p>";
+    console.error(error);
+  });
 /*  .then(response => response.text())
   .then(csv => {
     const rows = csv.split("\n").map(r => r.split(","));
@@ -82,39 +130,6 @@ fetch(csvURL)
     console.error(err);
   });*/
 
-
-  
-  .then(response => response.text())
-  .then(csv => {
-    const rows = csv.split("\n").slice(1); // on saute la première ligne (headers)
-    const container = document.getElementById("activities");
-    rows.forEach(row => {
-      const cols = row.split(",");
-      //if (cols.length < 6) return; // ignore lignes incomplètes //Non, pas pour l'instant
-      const date = cols[1].trim(); // index start à 1 car index 0 = ID
-      const name = cols[2].trim();
-      const desc = cols[3].trim();
-      const budget = cols[4].trim();
-      const maxP = cols[5].trim();
-      const currentP = cols[6].trim();
-
-      const html = `
-      <div class="activity">
-        <p><span class="highlight">Date :</span> ${date}</p>
-        <p><span class="highlight">Activité :</span> ${name}</p>
-        <p><span class="highlight">Description :</span> ${desc}</p>
-        <p><span class="highlight">Budget estimé :</span> ${budget} €</p>
-        <p><span class="highlight">Jusqu'à</span> ${maxP} participants</p>
-        <p><span class="highlight">Déjà inscrits :</span> ${currentP}</p>
-      </div>`;
-      container.insertAdjacentHTML("beforeend", html);
-    });
-  })
-  .catch(error => {
-    document.getElementById("activities").innerHTML =
-      "<p>Erreur lors du chargement des activités.</p>";
-    console.error(error);
-  });
 </script>
 
 </body>
