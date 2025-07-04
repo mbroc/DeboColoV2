@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Activités à venirs</title>
+<title>Activités à venir</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 <style>
   body {
@@ -45,23 +45,6 @@
 <div id="activities"></div>
 
 
-//à enlever
-<div style="font-family: 'Arial', sans-serif;">
-  {{#each records}}
-    <div style="background: #fef6e4; margin: 20px 0; padding: 15px; border-radius: 10px; border: 1px solid #fcd5ce; box-shadow: 2px 2px 5px rgba(0,0,0,0.05);">
-      <h2 style="color: #f582ae;">🌴 {{Nom de l'activité}}</h2>
-      <p><strong>📅 Date :</strong> {{Date}}</p>
-      <p><strong>📝 Description :</strong> {{Description}}</p>
-      {{#if Lien}}
-        <p><a href="{{Lien}}" style="background: #f582ae; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none;">S'inscrire</a></p>
-      {{/if}}
-    </div>
-        //à enlever
-
-
-
-
-  
 <script>
 // ⚠️ Remplace par l’ID de ton Google Sheet
 const sheetID = "1cLlpmX1vZTMyD7ED1AxMAs7tFGn8P7N5dqVbGSUUtl4";
@@ -70,6 +53,9 @@ const sheetID = "1cLlpmX1vZTMyD7ED1AxMAs7tFGn8P7N5dqVbGSUUtl4";
 const url = 'https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:csv';
 
 fetch(url)
+  document.getElementById("activities").innerHTML =
+      "<p>Erreur lors du chargement des activités.</p>";
+    console.error(error);
   .then(response => response.text())
   .then(csvText => {
     const rows = csvText.split("\n").slice(1); // on saute la première ligne (headers)
