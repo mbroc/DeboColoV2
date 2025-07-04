@@ -61,7 +61,8 @@ fetch(csvURL)
     const container = document.getElementById("activities");
     rows.forEach(row => {
       //const cols = row.split(",");
-      const cols = row.map(cell => cell.replace(/^"|"$/g, '')); //on retire les " ajoutés au champs (affichage plus propre)
+      //const cols = row.map(cell => cell.replace(/^"|"$/g, '')); //on retire les " ajoutés au champs (affichage plus propre)
+      const cols = row.split(",").map(cell => cell.replace(/^"|"$/g, '').trim()); //on retire les " ajoutés au champs (affichage plus propre)
       const activity_id = cols[0].trim(); 
       const date = cols[1].trim(); // index start à 1 car index 0 = ID
       const name = cols[2].trim();
