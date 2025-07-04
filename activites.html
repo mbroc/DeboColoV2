@@ -40,47 +40,50 @@
 </head>
 <body>
 
-<h1>Activités à venir 111</h1>
+<h1>Activités à venir</h1>
 
 <div id="activities"></div>
 
-<!-- 🔷 On charge Tabletop -->
+<!-- 🔷 On charge Tabletop AVANT ton script -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.4/tabletop.min.js"></script>
 
 <script>
-// ⚠️ Remplace par l’ID de ton Google Sheet
-const sheetID = "1cLlpmX1vZTMyD7ED1AxMAs7tFGn8P7N5dqVbGSUUtl4";
+window.onload = () => {
+  const sheetID = "1cLlpmX1vZTMyD7ED1AxMAs7tFGn8P7N5dqVbGSUUtl4";
 
-function afficherActivites(data) {
-  const container = document.getElementById("activities");
-  data.forEach(row => {
-    const date = row['Date']?.trim() || "";
-    const name = row["Nom de l'activité"]?.trim() || "";
-    const desc = row["Description"]?.trim() || "";
-    const budget = row["Budget (€)"]?.trim() || "";
-    const maxP = row["Max participants"]?.trim() || "";
-    const currentP = row["Inscriptions actuelles"]?.trim() || "";
+  function afficherActivites(data) {
+    const container = document.getElementById("activities");
+    if (!data.length) {
+      container.innerHTML = "<p>Aucune activité disponible pour le moment.</p>";
+      return;
+    }
+    data.forEach(row => {
+      const date = row['Date']?.trim() || "";
+      const name = row["Nom de l'activité"]?.trim() || "";
+      const desc = row["Description"]?.trim() || "";
+      const budget = row["Budget (€)"]?.trim() || "";
+      const maxP = row["Max participants"]?.trim() || "";
+      const currentP = row["Inscriptions actuelles"]?.trim() || "";
 
-    const html = `
-    <div class="activity">
-      <p><span class="highlight">Date :</span> ${date}</p>
-      <p><span class="highlight">Activité :</span> ${name}</p>
-      <p><span class="highlight">Description :</span> ${desc}</p>
-      <p><span class="highlight">Budget estimé :</span> ${budget} €</p>
-      <p><span class="highlight">Jusqu'à</span> ${maxP} participants</p>
-      <p><span class="highlight">Déjà inscrits :</span> ${currentP}</p>
-    </div>`;
-    container.insertAdjacentHTML("beforeend", html);
-  });
-}
+      const html = `
+      <div class="activity">
+        <p><span class="highlight">Date :</span> ${date}</p>
+        <p><span class="highlight">Activité :</span> ${name}</p>
+        <p><span class="highlight">Description :</span> ${desc}</p>
+        <p><span class="highlight">Budget estimé :</span> ${budget} €</p>
+        <p><span class="highlight">Jusqu'à</span> ${maxP} participants</p>
+        <p><span class="highlight">Déjà inscrits :</span> ${currentP}</p>
+      </div>`;
+      container.insertAdjacentHTML("beforeend", html);
+    });
+  }
 
-window.addEventListener('DOMContentLoaded', () => {
   Tabletop.init({
     key: sheetID,
     callback: afficherActivites,
     simpleSheet: true
   });
-});
+}
 </script>
 
 </body>
