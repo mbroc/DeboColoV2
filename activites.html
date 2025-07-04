@@ -60,8 +60,8 @@ fetch(csvURL)
     const rows = csv.split("\n").slice(1); // on saute la première ligne (headers)
     const container = document.getElementById("activities");
     rows.forEach(row => {
-      const cols = row.split(",");
-      //if (cols.length < 6) return; // ignore lignes incomplètes //Non, pas pour l'instant
+      //const cols = row.split(",");
+      const cols = row.map(cell => cell.replace(/^"|"$/g, '')); //on retire les " ajoutés au champs (affichage plus propre)
       const activity_id = cols[0].trim(); 
       const date = cols[1].trim(); // index start à 1 car index 0 = ID
       const name = cols[2].trim();
@@ -72,12 +72,12 @@ fetch(csvURL)
 
       const html = `
       <div class="activity">
-        <p><span class="highlight">Date :</span> ${date}</p>
         <p><span class="highlight">Activité :</span> ${name}</p>
+        <p><span class="highlight">Date :</span> ${date}</p>
         <p><span class="highlight">Description :</span> ${desc}</p>
         <p><span class="highlight">Budget estimé :</span> ${budget} €</p>
         <p><span class="highlight">Jusqu'à</span> ${maxP} participants</p>
-        <p><span class="highlight">Déjà inscrits :</span> ${currentP}\n</p> -- saut de ligne avant bouton inscription
+        <p><span class="highlight">Déjà inscrits :</span> ${currentP}\n</p> 
 
         <p><a href="{https://tally.so/r/m6YQoe?activity_id=${activity_id}}" style="background: #2196F3; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none;">S'inscrire</a></p>
 
