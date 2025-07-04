@@ -46,7 +46,7 @@
 </head>
 <body>
 
-<h1>Activités à venir bbbbbb</h1>
+<h1>Activités à venir aaaadsdada</h1>
 
 <div id="loader" class="loader">Chargement des activités…</div>
 <div id="activities"></div>
@@ -85,8 +85,8 @@ fetch(csvURL)
 
   
   //.then(response => response.text())
-  .then(csvText => {
-    const rows = csvText.split("\n").slice(1); // on saute la première ligne (headers)
+  .then(csv => {
+    //const rows = csv.split("\n").slice(1); // on saute la première ligne (headers)
     const container = document.getElementById("activities");
     rows.forEach(row => {
       const cols = row.split(",");
