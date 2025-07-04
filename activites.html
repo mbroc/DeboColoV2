@@ -50,7 +50,7 @@
 const sheetID = "1cLlpmX1vZTMyD7ED1AxMAs7tFGn8P7N5dqVbGSUUtl4";
 
 // URL publique d'export CSV (on lit en CSV pour plus de compatibilité)
-const url = "https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:csv";
+const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:csv`;
 
 fetch(url)
   .then(response => response.text())
@@ -79,7 +79,7 @@ fetch(url)
       const maxP = cols[5].trim();
       const currentP = cols[6].trim();
 
-      const html = '
+      const html = `
       <div class="activity">
         <p><span class="highlight">Date :</span> ${date}</p>
         <p><span class="highlight">Activité :</span> ${name}</p>
@@ -87,7 +87,7 @@ fetch(url)
         <p><span class="highlight">Budget estimé :</span> ${budget} €</p>
         <p><span class="highlight">Jusqu'à</span> ${maxP} participants</p>
         <p><span class="highlight">Déjà inscrits :</span> ${currentP}</p>
-      </div>';
+      </div>`;
       container.insertAdjacentHTML("beforeend", html);
     });
   })
