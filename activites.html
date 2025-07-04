@@ -36,54 +36,67 @@
     font-weight: bold;
     color: #222;
   }
+  .loader {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 18px;
+    color: #888;
+  }
 </style>
 </head>
 <body>
 
-<h1>Activités à venir 11111</h1>
+<h1>Activités à venir 1111</h1>
 
+<div id="loader" class="loader">Chargement des activités…</div>
 <div id="activities"></div>
 
-<!-- 🔷 On charge Tabletop AVANT ton script -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.4/tabletop.min.js"></script>
-
 <script>
-window.onload = () => {
-  const sheetID = "1cLlpmX1vZTMyD7ED1AxMAs7tFGn8P7N5dqVbGSUUtl4";
+const sheetURL = "https://spreadsheets.google.com/feeds/list/1cLlpmX1vZTMyD7ED1AxMAs7tFGn8P7N5dqVbGSUUtl4/od6/public/values?alt=json";
 
-  function afficherActivites(data) {
+fetch(sheetURL)
+  .then(response => response.json())
+  .then(data => {
+    const rows = data.feed.entry;
     const container = document.getElementById("activities");
-    if (!data.length) {
+    const loader = document.getElementById("loader");
+    loader.style.display = "none";
+
+    if (!rows || rows.length === 0) {
       container.innerHTML = "<p>Aucune activité disponible pour le moment.</p>";
       return;
     }
-    data.forEach(row => {
-      const date = row['Date']?.trim() || "";
-      const name = row["Nom de l'activité"]?.trim() || "";
-      const desc = row["Description"]?.trim() || "";
-      const budget = row["Budget (€)"]?.trim() || "";
-      const maxP = row["Max participants"]?.trim() || "";
-      const currentP = row["Inscriptions actuelles"]?.trim() || "";
 
+    // Tableau d'objets plus simple + tri sur la date
+    const activities = rows.map(row => ({
+      date: row.gsx$date.$t,
+      name: row.gsx$nomdelactivité.$t,
+      desc: row.gsx$description.$t,
+      budget: row.gsx$budget.$t,
+      maxP: row.gsx$maxparticipants.$t,
+      currentP: row.gsx$inscriptionsactuelles.$t
+    }));
+
+    activities.sort((a, b) => new Date(a.date.split("/").reverse().join("-")) - new Date(b.date.split("/").reverse().join("-")));
+
+    activities.forEach(act => {
       const html = `
       <div class="activity">
-        <p><span class="highlight">Date :</span> ${date}</p>
-        <p><span class="highlight">Activité :</span> ${name}</p>
-        <p><span class="highlight">Description :</span> ${desc}</p>
-        <p><span class="highlight">Budget estimé :</span> ${budget} €</p>
-        <p><span class="highlight">Jusqu'à</span> ${maxP} participants</p>
-        <p><span class="highlight">Déjà inscrits :</span> ${currentP}</p>
+        <p><span class="highlight">Date :</span> ${act.date}</p>
+        <p><span class="highlight">Activité :</span> ${act.name}</p>
+        <p><span class="highlight">Description :</span> ${act.desc}</p>
+        <p><span class="highlight">Budget estimé :</span> ${act.budget} €</p>
+        <p><span class="highlight">Jusqu'à</span> ${act.maxP} participants</p>
+        <p><span class="highlight">Déjà inscrits :</span> ${act.currentP}</p>
       </div>`;
       container.insertAdjacentHTML("beforeend", html);
     });
-  }
-
-  Tabletop.init({
-    key: sheetID,
-    callback: afficherActivites,
-    simpleSheet: true
+  })
+  .catch(error => {
+    console.error(error);
+    document.getElementById("loader").innerHTML =
+      "<p>Erreur lors du chargement des activités.</p>";
   });
-}
 </script>
 
 </body>
