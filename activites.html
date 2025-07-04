@@ -47,8 +47,6 @@
 <body>
 
 <h1>Activités à venir</h1>
-
-<div id="loader" class="loader">Chargement des activités…</div>
 <div id="activities"></div>
 
 <script>
@@ -79,20 +77,11 @@ fetch(csvURL)
         <p><span class="highlight">Description :</span> ${desc}</p>
         <p><span class="highlight">Budget estimé :</span> ${budget} €</p>
         <p><span class="highlight">Jusqu'à</span> ${maxP} participants</p>
-        <p><strong>Jusqu'à :</strong> ${maxP} participants</p>
         <p><span class="highlight">Déjà inscrits :</span> ${currentP}</p>
 
-        
-        <p><strong>Date :</strong> ${date}</p>
-        <p><strong>Activité :</strong> ${name}</p>
-        <p><strong>Description :</strong> ${desc}</p>
-        <p><strong>Budget estimé :</strong> ${budget} €</p>
-        <p><strong>Jusqu'à :</strong> ${maxP} participants</p>
-        <p><strong>Déjà inscrits :</strong> ${currentP} participants</p>
+        <p></p>
+        <p><a href="{https://tally.so/r/m6YQoe?activity_id=${activity_id}}" style="background: #2196F3; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none;">S'inscrire</a></p>
 
-        <p><a href="{{https://tally.so/r/m6YQoe?activity_id=${activity_id}}}" style="background: #2196F3; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none;">S'inscrire</a></p>
-
-      
       </div>`;
       container.insertAdjacentHTML("beforeend", html);
     });
@@ -102,31 +91,6 @@ fetch(csvURL)
       "<p>Erreur lors du chargement des activités.</p>";
     console.error(error);
   });
-/*  .then(response => response.text())
-  .then(csv => {
-    const rows = csv.split("\n").map(r => r.split(","));
-    const container = document.getElementById("activities");
-
-    for (let i = 1; i < rows.length; i++) { // skip header
-      const [date, name, desc, budget, maxP, currentP] = rows[i];
-      const html = `
-      <div class="activity">
-        <p><strong>Date :</strong> ${date}</p>
-        <p><strong>Activité :</strong> ${name}</p>
-        <p><strong>Description :</strong> ${desc}</p>
-        <p><strong>Budget estimé :</strong> ${budget} €</p>
-        <p><strong>Jusqu'à</strong> ${maxP} participants</p>
-        <p><strong>Déjà inscrits :</strong> ${currentP}</p>
-      </div>`;
-      container.insertAdjacentHTML("beforeend", html);
-    }
-  })
-  .catch(err => {
-    document.getElementById("activities").textContent =
-      "Erreur lors du chargement des activités.";
-    console.error(err);
-  });*/
-
 </script>
 
 </body>
