@@ -46,58 +46,39 @@
 </head>
 <body>
 
-<h1>Activités à venir xxxxx</h1>
+<h1>Activités à venir xxxxxxx</h1>
 
 <div id="loader" class="loader">Chargement des activités…</div>
 <div id="activities"></div>
 
 <script>
-//const sheetURL = "https://spreadsheets.google.com/feeds/list/1cLlpmX1vZTMyD7ED1AxMAs7tFGn8P7N5dqVbGSUUtl4/od6/public/values?alt=json";
-const sheetURL = "https://spreadsheets.google.com/feeds/worksheets/1cLlpmX1vZTMyD7ED1AxMAs7tFGn8P7N5dqVbGSUUtl4/public/basic?alt=json";
+const sheetID = "1cLlpmX1vZTMyD7ED1AxMAs7tFGn8P7N5dqVbGSUUtl4";
+const csvURL = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:csv`;
 
-
-fetch(sheetURL)
-  .then(response => response.json())
-  .then(data => {
-    const rows = data.feed.entry;
+fetch(csvURL)
+  .then(response => response.text())
+  .then(csv => {
+    const rows = csv.split("\n").map(r => r.split(","));
     const container = document.getElementById("activities");
-    const loader = document.getElementById("loader");
-    loader.style.display = "none";
 
-    if (!rows || rows.length === 0) {
-      container.innerHTML = "<p>Aucune activité disponible pour le moment.</p>";
-      return;
-    }
-
-    // Tableau d'objets plus simple + tri sur la date
-    const activities = rows.map(row => ({
-      date: row.gsx$date.$t,
-      name: row.gsx$nomdelactivité.$t,
-      desc: row.gsx$description.$t,
-      budget: row.gsx$budget.$t,
-      maxP: row.gsx$maxparticipants.$t,
-      currentP: row.gsx$inscriptionsactuelles.$t
-    }));
-
-    activities.sort((a, b) => new Date(a.date.split("/").reverse().join("-")) - new Date(b.date.split("/").reverse().join("-")));
-
-    activities.forEach(act => {
+    for (let i = 1; i < rows.length; i++) { // skip header
+      const [date, name, desc, budget, maxP, currentP] = rows[i];
       const html = `
       <div class="activity">
-        <p><span class="highlight">Date :</span> ${act.date}</p>
-        <p><span class="highlight">Activité :</span> ${act.name}</p>
-        <p><span class="highlight">Description :</span> ${act.desc}</p>
-        <p><span class="highlight">Budget estimé :</span> ${act.budget} €</p>
-        <p><span class="highlight">Jusqu'à</span> ${act.maxP} participants</p>
-        <p><span class="highlight">Déjà inscrits :</span> ${act.currentP}</p>
+        <p><strong>Date :</strong> ${date}</p>
+        <p><strong>Activité :</strong> ${name}</p>
+        <p><strong>Description :</strong> ${desc}</p>
+        <p><strong>Budget estimé :</strong> ${budget} €</p>
+        <p><strong>Jusqu'à</strong> ${maxP} participants</p>
+        <p><strong>Déjà inscrits :</strong> ${currentP}</p>
       </div>`;
       container.insertAdjacentHTML("beforeend", html);
-    });
+    }
   })
-  .catch(error => {
-    console.error(error);
-    document.getElementById("loader").innerHTML =
-      "<p>Erreur lors du chargement des activités.</p>";
+  .catch(err => {
+    document.getElementById("activities").textContent =
+      "Erreur lors du chargement des activités.";
+    console.error(err);
   });
 </script>
 
