@@ -53,13 +53,17 @@ const sheetID = "1cLlpmX1vZTMyD7ED1AxMAs7tFGn8P7N5dqVbGSUUtl4";
 const url = 'https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:csv';
 
 fetch(url)
-  document.getElementById("activities").innerHTML =
-      "<p>Erreur lors du chargement des activités.</p>";
-    console.error(error);
   .then(response => response.text())
   .then(csvText => {
     const rows = csvText.split("\n").slice(1); // on saute la première ligne (headers)
     const container = document.getElementById("activities");
+
+
+    document.getElementById("activities").innerHTML =
+      "<p>Erreur lors du chargement des activités.</p>";
+    console.error(error);
+
+    
     rows.forEach(row => {
       const cols = row.split(",");
       //if (cols.length < 6) return; // ignore lignes incomplètes //Non, pas pour l'instant
