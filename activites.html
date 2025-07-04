@@ -86,7 +86,7 @@ fetch(csvURL)
   
   //.then(response => response.text())
   .then(csv => {
-    //const rows = csv.split("\n").slice(1); // on saute la première ligne (headers)
+    const rows = csv.split("\n").slice(1); // on saute la première ligne (headers)
     const container = document.getElementById("activities");
     rows.forEach(row => {
       const cols = row.split(",");
@@ -98,7 +98,7 @@ fetch(csvURL)
       const maxP = cols[5].trim();
       const currentP = cols[6].trim();
 
-      const html = '
+      const html = `
       <div class="activity">
         <p><span class="highlight">Date :</span> ${date}</p>
         <p><span class="highlight">Activité :</span> ${name}</p>
@@ -106,7 +106,7 @@ fetch(csvURL)
         <p><span class="highlight">Budget estimé :</span> ${budget} €</p>
         <p><span class="highlight">Jusqu'à</span> ${maxP} participants</p>
         <p><span class="highlight">Déjà inscrits :</span> ${currentP}</p>
-      </div>';
+      </div>`;
       container.insertAdjacentHTML("beforeend", html);
     });
   })
