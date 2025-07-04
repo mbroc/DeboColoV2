@@ -46,7 +46,7 @@
 </head>
 <body>
 
-<h1>Activités à venir xxxxxxx</h1>
+<h1>Activités à venir aaaaaaaaa</h1>
 
 <div id="loader" class="loader">Chargement des activités…</div>
 <div id="activities"></div>
@@ -56,7 +56,7 @@ const sheetID = "1cLlpmX1vZTMyD7ED1AxMAs7tFGn8P7N5dqVbGSUUtl4";
 const csvURL = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:csv`;
 
 fetch(csvURL)
-  .then(response => response.text())
+/*  .then(response => response.text())
   .then(csv => {
     const rows = csv.split("\n").map(r => r.split(","));
     const container = document.getElementById("activities");
@@ -79,6 +79,37 @@ fetch(csvURL)
     document.getElementById("activities").textContent =
       "Erreur lors du chargement des activités.";
     console.error(err);
+  });*/
+  .then(response => response.text())
+  .then(csvText => {
+    const rows = csvText.split("\n").slice(1); // on saute la première ligne (headers)
+    const container = document.getElementById("activities");
+    rows.forEach(row => {
+      const cols = row.split(",");
+      //if (cols.length < 6) return; // ignore lignes incomplètes //Non, pas pour l'instant
+      const date = cols[1].trim(); // index start à 1 car index 0 = ID
+      const name = cols[2].trim();
+      const desc = cols[3].trim();
+      const budget = cols[4].trim();
+      const maxP = cols[5].trim();
+      const currentP = cols[6].trim();
+
+      const html = '
+      <div class="activity">
+        <p><span class="highlight">Date :</span> ${date}</p>
+        <p><span class="highlight">Activité :</span> ${name}</p>
+        <p><span class="highlight">Description :</span> ${desc}</p>
+        <p><span class="highlight">Budget estimé :</span> ${budget} €</p>
+        <p><span class="highlight">Jusqu'à</span> ${maxP} participants</p>
+        <p><span class="highlight">Déjà inscrits :</span> ${currentP}</p>
+      </div>';
+      container.insertAdjacentHTML("beforeend", html);
+    });
+  })
+  .catch(error => {
+    document.getElementById("activities").innerHTML =
+      "<p>Erreur lors du chargement des activités.</p>";
+    console.error(error);
   });
 </script>
 
