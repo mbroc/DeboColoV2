@@ -55,18 +55,6 @@ const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:c
 fetch(url)
   .then(response => response.text())
   .then(csvText => {
-
-
-     <div class="activity">
-        <p><span class="highlight">Date :</span> ${date}</p>
-        <p><span class="highlight">Activité :</span> ${name}</p>
-        <p><span class="highlight">Description :</span> ${desc}</p>
-        <p><span class="highlight">Budget estimé :</span> ${budget} €</p>
-        <p><span class="highlight">Jusqu'à</span> ${maxP} participants</p>
-        <p><span class="highlight">Déjà inscrits :</span> ${currentP}</p>
-      </div>'
-
-    
     const rows = csvText.split("\n").slice(1); // on saute la première ligne (headers)
     const container = document.getElementById("activities");
     rows.forEach(row => {
