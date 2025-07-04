@@ -66,6 +66,23 @@ fetch(url)
       const maxP = cols[5].trim();
       const currentP = cols[6].trim();
 
+
+
+//à enlever
+<div style="font-family: 'Arial', sans-serif;">
+  {{#each records}}
+    <div style="background: #fef6e4; margin: 20px 0; padding: 15px; border-radius: 10px; border: 1px solid #fcd5ce; box-shadow: 2px 2px 5px rgba(0,0,0,0.05);">
+      <h2 style="color: #f582ae;">🌴 {{Nom de l'activité}}</h2>
+      <p><strong>📅 Date :</strong> {{Date}}</p>
+      <p><strong>📝 Description :</strong> {{Description}}</p>
+      {{#if Lien}}
+        <p><a href="{{Lien}}" style="background: #f582ae; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none;">S'inscrire</a></p>
+      {{/if}}
+    </div>
+        //à enlever
+
+
+      
       /*const html = '
       <div class="activity">
         <p><span class="highlight">Date :</span> ${date}</p>
