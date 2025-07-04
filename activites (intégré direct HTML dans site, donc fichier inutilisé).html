@@ -60,8 +60,6 @@ fetch(csvURL)
     const rows = csv.split("\n").slice(1); // on saute la première ligne (headers)
     const container = document.getElementById("activities");
     rows.forEach(row => {
-      //const cols = row.split(",");
-      //const cols = row.map(cell => cell.replace(/^"|"$/g, '')); //on retire les " ajoutés au champs (affichage plus propre)
       const cols = row.split(",").map(cell => cell.replace(/^"|"$/g, '').trim()); //on retire les " ajoutés au champs (affichage plus propre)
       const activity_id = cols[0].trim(); 
       const date = cols[1].trim(); // index start à 1 car index 0 = ID
@@ -78,9 +76,9 @@ fetch(csvURL)
         <p><span class="highlight">Description :</span> ${desc}</p>
         <p><span class="highlight">Budget estimé :</span> ${budget} €</p>
         <p><span class="highlight">Jusqu'à</span> ${maxP} participants</p>
-        <p><span class="highlight">Déjà inscrits :</span> ${currentP}\n</p> 
-
-        <p><a href="{https://tally.so/r/m6YQoe?activity_id=${activity_id}}" style="background: #2196F3; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none;">S'inscrire</a></p>
+        <p><span class="highlight">Déjà inscrits :</span> ${currentP}</p> 
+        <br> 
+        <p><a href="https://tally.so/r/m6YQoe?activity_id=${activity_id}" style="background: #2196F3; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none;">S'inscrire</a></p>
 
       </div>`;
       container.insertAdjacentHTML("beforeend", html);
