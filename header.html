@@ -7,7 +7,7 @@
 <style>
   body {
     margin: 0;
-    background: #000080 url('https://i.imgur.com/xzVzOEd.png') repeat; /* fond bleu étoilé */
+    background: #000080 url('https://mbroc.github.io/DeboColoV2/Fond galaxie.jpg') repeat; /* fond bleu étoilé */
     color: #FFD43B; /* jaune */
     font-family: 'Roboto', sans-serif;
     text-align: center;
@@ -47,7 +47,7 @@
     left: 10%;
     width: 150px;
     height: 150px;
-    background: url('https://i.imgur.com/Jzy9Qfa.gif') no-repeat center/contain;
+    background: url('https://mbroc.github.io/DeboColoV2/explosion.gif') no-repeat center/contain;
     transform: translateY(-50%);
     display: none;
     pointer-events: none;
@@ -57,9 +57,9 @@
 
 <body>
 <div class="header">
-  <img src="https://i.imgur.com/3KZt6zA.png" alt="Chat gauche" class="cat left" id="cat-left">
+  <img src="https://mbroc.github.io/DeboColoV2/Tesla.JPG" alt="Chat gauche" class="cat left" id="cat-left">
   <h1>Bienvenue à la<br>Débo Colo<br>2ème édition</h1>
-  <img src="https://i.imgur.com/ftFBkQx.png" alt="Chat droit" class="cat right">
+  <img src="https://mbroc.github.io/DeboColoV2/Cupra.jpg" alt="Chat droit" class="cat right">
   <div class="explosion" id="explosion"></div>
 </div>
 
@@ -78,10 +78,10 @@
     sound.currentTime = 0;
     sound.play();
 
-    // Cache l’explosion après 1.5 secondes
+    // Cache l’explosion après 1 seconde
     setTimeout(() => {
       explosion.style.display = 'none';
-    }, 1500);
+    }, 1000);
   });
 </script>
 
