@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Débo Colo — En-tête interactif</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    background: #000080 url('https://i.imgur.com/xzVzOEd.png') repeat; /* fond bleu étoilé */
+    color: #FFD43B; /* jaune */
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+  }
+
+  .header {
+    padding: 40px 20px;
+    position: relative;
+  }
+
+  .header h1 {
+    font-size: 60px;
+    margin: 20px 0;
+    line-height: 1.2;
+  }
+
+  .cat {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 150px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .cat.left {
+    left: 10%;
+  }
+
+  .cat.right {
+    right: 10%;
+  }
+
+  .explosion {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    width: 150px;
+    height: 150px;
+    background: url('https://i.imgur.com/Jzy9Qfa.gif') no-repeat center/contain;
+    transform: translateY(-50%);
+    display: none;
+    pointer-events: none;
+  }
+</style>
+</head>
+
+<body>
+<div class="header">
+  <img src="https://i.imgur.com/3KZt6zA.png" alt="Chat gauche" class="cat left" id="cat-left">
+  <h1>Bienvenue à la<br>Débo Colo<br>2ème édition</h1>
+  <img src="https://i.imgur.com/ftFBkQx.png" alt="Chat droit" class="cat right">
+  <div class="explosion" id="explosion"></div>
+</div>
+
+<!-- 🔊 son d’explosion -->
+<audio id="explosion-sound" src="https://www.soundjay.com/mechanical/explosion-01.mp3"></audio>
+
+<script>
+  const catLeft = document.getElementById('cat-left');
+  const explosion = document.getElementById('explosion');
+  const sound = document.getElementById('explosion-sound');
+
+  catLeft.addEventListener('click', () => {
+    // Affiche l’animation
+    explosion.style.display = 'block';
+    // Joue le son
+    sound.currentTime = 0;
+    sound.play();
+
+    // Cache l’explosion après 1 seconde
+    setTimeout(() => {
+      explosion.style.display = 'none';
+    }, 1000);
+  });
+</script>
+
+</body>
+</html>
