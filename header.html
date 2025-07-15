@@ -45,8 +45,8 @@
     position: absolute;
     top: 50%;
     left: 10%;
-    width: 150px;
-    height: 150px;
+    width: 175px;
+    height: 175px;
     background: url('https://mbroc.github.io/DeboColoV2/explosion.gif') no-repeat center/contain;
     transform: translateY(-50%);
     display: none;
@@ -59,7 +59,7 @@
 <div class="header">
   <img src="https://mbroc.github.io/DeboColoV2/Tesla.JPG" alt="Chat gauche" class="cat left" id="cat-left">
   <h1>Bienvenue à la<br>Débo Colo<br>2ème édition</h1>
-  <img src="https://mbroc.github.io/DeboColoV2/Cupra.jpg" alt="Chat droit" class="cat right">
+  <img src="https://mbroc.github.io/DeboColoV2/Cupra.JPG" alt="Chat droit" class="cat right">
   <div class="explosion" id="explosion"></div>
 </div>
 
@@ -78,10 +78,10 @@
     sound.currentTime = 0;
     sound.play();
 
-    // Cache l’explosion après 1 seconde
+    // Cache l’explosion après 1.5 secondes
     setTimeout(() => {
       explosion.style.display = 'none';
-    }, 1000);
+    }, 1500);
   });
 </script>
 
