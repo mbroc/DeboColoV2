@@ -45,9 +45,9 @@
   .explosion {
     position: absolute;
     top: 50%;
-    left: 5%;
-    width: 275px;
-    height: 275px;
+    left: 10%;
+    width: 300px;
+    height: 300px;
     background: url('https://mbroc.github.io/DeboColoV2/explosion.gif') no-repeat center/contain;
     transform: translateY(-50%);
     display: none;
@@ -58,16 +58,16 @@
 
 <body>
 <div class="header">
-  <!-- <img src="https://mbroc.github.io/DeboColoV2/Tesla.JPG" alt="Chat gauche" class="cat left" id="cat-left"> -->
   <img src="https://mbroc.github.io/DeboColoV2/Tesla_transparent.png" alt="Chat gauche" class="cat left" id="cat-left">
+  <!-- <img src="https://mbroc.github.io/DeboColoV2/Tesla.JPG" alt="Chat gauche" class="cat left" id="cat-left"> -->
   <h1>Bienvenue à la<br>Débo Colo<br>2ème édition</h1>  
-  <!-- <img src="https://mbroc.github.io/DeboColoV2/Cupra.JPG" alt="Chat droit" class="cat right"> -->
   <img src="https://mbroc.github.io/DeboColoV2/Cupra_transparent.png" alt="Chat droit" class="cat right">
+  <!-- <img src="https://mbroc.github.io/DeboColoV2/Cupra.JPG" alt="Chat droit" class="cat right"> -->
   <div class="explosion" id="explosion"></div>
 </div>
 
 <!-- 🔊 son d’explosion -->
-<audio id="explosion-sound" src="https://www.soundjay.com/mechanical/explosion-01.mp3"></audio>
+<!-- <audio id="explosion-sound" src="https://www.soundjay.com/mechanical/explosion-01.mp3"></audio> -->
 
 <script>
   const catLeft = document.getElementById('cat-left');
@@ -78,8 +78,8 @@
     // Affiche l’animation
     explosion.style.display = 'block';
     // Joue le son
-    sound.currentTime = 0;
-    sound.play();
+    //sound.currentTime = 0;
+    //sound.play();
 
     // Cache l’explosion après 2 secondes
     setTimeout(() => {
