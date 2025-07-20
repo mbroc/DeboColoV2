@@ -37,7 +37,8 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   calendar.render();
 
-  const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRhZCXTVquiXqk__NIXf1GRK0x_FEm0LYafcHY96tHbQCTJ8PUoVmBpvaS67ZG4tCdayeEiJTT9UBwc/pubhtml"; // 🔷 Remplace par ton lien CSV public
+  //const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRhZCXTVquiXqk__NIXf1GRK0x_FEm0LYafcHY96tHbQCTJ8PUoVmBpvaS67ZG4tCdayeEiJTT9UBwc/pubhtml"; // 🔷 Remplace par ton lien CSV public
+  const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRhZCXTVquiXqk__NIXf1GRK0x_FEm0LYafcHY96tHbQCTJ8PUoVmBpvaS67ZG4tCdayeEiJTT9UBwc/pub?output=csv"; // 🔷 Remplace par ton lien CSV public
 
   fetch(csvUrl)
     .then(response => response.text())
